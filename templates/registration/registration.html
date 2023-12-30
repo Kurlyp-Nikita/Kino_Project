@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <title>Регистрация</title>
+      <link rel="stylesheet" href="{% static 'registration.css' %}">
+      <link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <h2>Регистрация</h2>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {% for one in forma %}
+            <div>{{ one.label_tag }} {{ one }}</div>  {# label_tag дает django автоматом#}
+            <div>{{ one.errors }}</div>   {# errors дает django автоматом#}
+        {% endfor %}
+    <input type="submit" value="Отправить">
+    </form>
+{% endblock %}
+
+
+

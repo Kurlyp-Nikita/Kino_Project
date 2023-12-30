@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+  <title>Подробно о актёре</title>
+  <link rel="stylesheet" href="{% static 'actor_detail.css' %}">
+  <link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <img src="{{ actor.image }}" alt="">
+    <h2>Актёр: {{ actor.name }} {{ actor.last_name }}</h2>
+    <h4>Дата рождения: {{ actor.data }}</h4>
+    <h4>Колличество фильмов: {{ actor.filmcount }}</h4>
+    <h4>Лучшие фильмы: {{ actor.best|linebreaks }}</h4>
+    <h4>Ссылка: <a href="{{ actor.info }}">{{ actor.info }}</a></h4>
+
+
+{% endblock content %}

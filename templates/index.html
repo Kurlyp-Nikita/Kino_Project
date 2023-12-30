@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+    <title>Главная Страница</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    {% endblock head %}
+</head>
+<body>
+    {% block menu %}
+        <div class="menu">
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'allactor' %}">Актёры</a>
+            <a href="{% url 'alldirector' %}">Режиссёры</a>
+            <a href="{% url 'allkino' %}">Фильмы</a>
+
+            {% if user.username %}
+                <a href="{% url 'podpiska' user.id %}">Личный кабинет</a>
+
+            {% else %}
+                <a href="{% url 'podpiska' 0 %}">Подписка</a>
+            {% endif %}
+
+            {% if not user.username %}
+                <a href="{% url 'login' %}">Вход</a>
+
+            {% else %}
+                <a href="{% url 'logout' %}?next={% url 'login' %}">Выход</a>
+            {% endif %}
+        </div>
+    {% endblock menu %}
+
+
+    {% block content %}
+        <div class="cont">
+            <h2>Добро пожаловать на сайт {{ user.username }}</h2>
+            <h3>На сайте {{ k1 }} фильмов</h3>
+            <h3>На сайте {{ k2 }} фильмов бесплатных</h3>
+        </div>
+    {% endblock content %}
+</body>
+</html>
+
+
