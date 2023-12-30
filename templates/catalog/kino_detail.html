@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+  <title>Подробно о фильме</title>
+  <link rel="stylesheet" href="{% static 'kinos_detail.css' %}">
+  <link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+  <div class="block">
+      <img src="{{ kino.image }}" alt="">
+      <h4>Фильм: {{ kino.title }}</h4>
+      <h4>Режжисёр: {{ kino.director.name }} {{ kino.director.last_name }}</h4>
+      <h4>Актёры: {{ kino.displayAct }}</h4>
+      <h4>Описание: {{ kino.opisanie }}</h4>
+      <h4>Подписка: {{ kino.podpiska.level }}</h4>
+
+      {% if user.profileuser.podpiska.id >= kino.podpiska.id %}
+          <iframe src="{{ kino.treler }}" allowfullscreen width="300"></iframe>
+
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Отправиить">
+          </form>
+
+          {% for one in comments %}
+            <div>
+                Имя {{ one.user.username }}
+            </div>
+            <div>
+                Дата {{ one.timedata }}
+            </div>
+            <div>
+                Коментарий {{ one.body }}
+            </div>
+
+          {% endfor %}
+      {% else %}
+          <h3>Купите подписку!</h3>
+      {% endif %}
+  </div>
+
+{% endblock content %}
+
+
+
+
+

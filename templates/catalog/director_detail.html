@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <title>Список режиссёра</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'director_details.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <img src="{{ director.image }}" alt="">
+    <h2>Режжисёр: {{ director.name }} {{ director.last_name }}</h2>
+    <h4>Дата рождения: {{ director.data }}</h4>
+    <h4>Колличество фильмов: {{ director.filmcount }}</h4>
+    <h4>Лучшие фильмы: {{ director.best|linebreaks }}</h4>
+    <h4>Ссылка: <a href="{{ director.info }}">{{ director.info }}</a></h4>
+
+
+{% endblock content %}
