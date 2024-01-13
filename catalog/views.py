@@ -25,13 +25,21 @@ class kinolist(generic.ListView):
 def proverka(newcom):
     blacklist = ['блять']
     spisok = newcom.body.split()
+    active = True
+    num = Comment.objects.all().count()
+    oldcom = Comment.objects.get(id=(num-1))
+
+    if oldcom.body == newcom.body and oldcom.user == newcom.user:
+        newcom.delete()
+        active = False
 
     if any(one in blacklist for one in spisok):
         newcom.delete()
+        active = False
+
     else:
         newcom.active = True
         newcom.save()
-
 
 
 def kinodetail(req, pk):
